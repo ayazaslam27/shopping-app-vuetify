@@ -2,6 +2,11 @@ export function normalizeSlideIndex(index, slidesCount) {
   if (index < 0) {
     return (index + slidesCount) % slidesCount;
   }
+  
+  if(index ==0 && slidesCount == 0){
+    return 0;
+  }
+
   return index % slidesCount;
 }
 

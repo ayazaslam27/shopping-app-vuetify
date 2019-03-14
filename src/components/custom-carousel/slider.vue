@@ -35,7 +35,7 @@ export default {
       allSlides: [],
       defaults: {},
       delta: { x: 0, y: 0 },
-      itemsToShow: 0
+      itemsToShow: 3
     };
   },
   props: {
@@ -104,14 +104,7 @@ export default {
 
       window.addEventListener("resize", this.update);
     },
-    update() {
-      if (window.outerWidth < 1000 && window.outerWidth >= 500) {
-        this.itemsToShow = 5;
-      } else if (window.outerWidth < 500) {
-        this.itemsToShow = 3;
-      } else {
-        this.itemsToShow = 2;
-      }
+    update() {      
       this.updateWidth();
     },
     gotoSlide(slideIndex) {

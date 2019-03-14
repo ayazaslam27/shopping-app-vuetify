@@ -3,7 +3,6 @@
     <v-app id="inspire">
       <v-layout column>
         <navigation v-on:toggleSideMenu="toggleSideMenu"/>
-        <cart ref="cart" :showCart="showCart && !mobileVersion"></cart>
         <router-view :shouldOpenSideMenu="showSideMenu"></router-view>
       </v-layout>
     </v-app>
@@ -12,7 +11,6 @@
 
 <script>
 import navigation from "@/components/navBar/navBar.vue";
-import cart from "./components/cart/cart";
 import apiActions from "./js/restfulApiCaller/apiActions";
 import jwt from "jsonwebtoken";
 import "@fortawesome/fontawesome-free/css/all.css";
@@ -26,14 +24,6 @@ export default {
     };
   },
   mounted() {
-    var that = this;
-    this.$on("hideCartEvent", val => {
-      setTimeout(function() {
-        if (!that.$refs.cart.isActive) {
-          that.showCart = false;
-        }
-      }, 400);
-    });
     setInterval(this.checkTokenExpiration(), 1000); //
   },
   created() {
@@ -86,7 +76,6 @@ export default {
   },
   components: {
     navigation,
-    cart
   },
   mixins: [eventMixin]
 };

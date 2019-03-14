@@ -2,7 +2,6 @@
   <section>
     <carousel :title="'Top Products'"></carousel>
     <carousel :title="'Weekly offers'"></carousel>
-    <carousel :title="'Blogs'"></carousel>
 
     <section class="d-flex flex-column col-12">
       <div v-if="!mobileVersion" class="h4 d-flex justify-content-center minor-heading">Brands</div>

@@ -1,52 +1,43 @@
 <template>
-  <section v-if="items.length > 0">
-    <div class="h4 d-flex justify-content-center carousel-heading-background">
-      <em
-        class="heading-title-carousel"
-        :style="[!mobileVersion? {'font-size': '1.2em'}:{}]"
-      >{{title}}</em>
-    </div>
+<v-container grid-list-md text-xs-center>
+ <v-layout row wrap>
+      <v-flex xs12>
+        <v-card dark color="primary">
+          <v-card-text>{{title}}</v-card-text>
+        </v-card>
+      </v-flex>
 
     <slider :settings="settings">
       <slide v-for="(item, index) in items" :key="index + 'S'">
-        <router-link
-          :to="{ name: 'detail-article', params: { brand: item.brand,  id: item.articleNumber }}"
-          class="w-100"
-        >
-          <div :class="[mobileVersion? 'flex-column': 'flex-row']" class="d-flex">
-            <div class="d-flex justify-content-center">
-              <img
-                :width="[mobileVersion? 75 : 100]"
-                :height="[mobileVersion? 75 : 100]"
-                :src="item.thumbnail"
-              >
-            </div>
-
-            <div
-              :class="[mobileVersion? 'pt-1': 'pl-2']"
-              class="d-flex flex-column text justify-content-center"
+        <v-card  d-flex xs12>
+          <v-flex d-flex>
+            <router-link
+            :to="{ name: 'detail-article', params: { brand: item.brand,  id: item.articleNumber }}"      
             >
-              <span class="text" :class="[mobileVersion? 'small-text': '']">{{item.title}}</span>
-              <div class="stars-outer">
-                <div
-                  class="stars-inner"
-                  :style="[{'width': `${Math.round(((item.rating) / 5) * 100)}%`}]"
-                ></div>
-              </div>
-              <span
-                class="numeric-field old-price"
-                :class="[mobileVersion? 'small-text': '']"
-              >Old: {{item.oldPrice}}</span>
-              <span
-                class="numeric-field"
-                :class="[mobileVersion? 'small-text': '']"
-              >New: {{item.price}}</span>
-            </div>
-          </div>
-        </router-link>
+          <v-flex d-flex row>
+              <v-flex xs4>
+                <img
+                  :width="[mobileVersion? 75 : 150]"
+                  :height="[mobileVersion? 75 : 150]"
+                  :src="item.thumbnail"
+                >
+              </v-flex>
+            <v-flex pb-4 xs6>
+                <div class="product-title">{{item.title}}</div>
+                 <div class="text-xs-center">
+                  <v-rating v-model="item.rating"></v-rating>
+                </div>
+                <div class=" old-price" >Old: {{item.oldPrice}}</div>
+                <div>New: {{item.price}}</div>
+            </v-flex>
+            </v-flex>
+          </router-link>
+          </v-flex>
+        </v-card>        
       </slide>
     </slider>
-  </section>
+  </v-layout>
+</v-container>
 </template>
 
 <script>
@@ -69,7 +60,7 @@ export default {
         initialSlide: 0,
         // count of items to slide when use navigation buttons
         itemsToSlide: 1,
-        centerMode: false
+        centerMode: false, 
       }
     };
   },
@@ -95,24 +86,10 @@ export default {
 </script>
 
 <style>
-.small-text {
-  font-size: small;
-}
-.text {
-  word-wrap: unset;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.carousel-heading-background {
-  background: orangered;
-}
-
-.heading-title-carousel {
-  color: white;
-  font-size: normal;
-  font-weight: bold;
+.product-title{
+  width: 20em;
+    height: 6em;
 }
 </style>
+
 
