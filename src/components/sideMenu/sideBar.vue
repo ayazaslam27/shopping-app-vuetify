@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer stateless value="true" v-click-outside="clickedOutside">
+  <v-navigation-drawer value="true" v-click-outside="clickedOutside">
     <v-list>
       <v-list-group v-for="(item, index) in menu" :key="index + '-SB'">
         <v-list-tile :to="{ name: 'main-category', params: {category: item.Name}}" slot="activator">
@@ -84,10 +84,6 @@ export default {
 };
 </script>
 <style>
-.sidebar-icons {
-  justify-content: center;
-  padding-right: 1em;
-}
 .icon {
   color: dodgerblue !important;
 }

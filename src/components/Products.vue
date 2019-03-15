@@ -1,7 +1,13 @@
 ﻿<template>
   <v-layout column>
+    <v-flex text-xs-center>
+      <v-card dark color="primary">
+        <v-card-text>Products</v-card-text>
+      </v-card>
+    </v-flex>
+
     <template v-for="(item, index) in reativeItems">
-      <v-container fluid grid-list-md :key="index + 'PB'">
+      <v-container grid-list-md :key="index + 'PB'">
         <v-card class="card" d-flex>
           <banner :item="item"></banner>
         </v-card>

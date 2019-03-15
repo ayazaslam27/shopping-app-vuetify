@@ -15,7 +15,6 @@
         prepend-icon="search"
         placeholder="Search"
         clearable
-        xs12
         sm4
       ></v-text-field>
 
@@ -97,9 +96,12 @@ export default {
 <style>
 .brand-heading {
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  color: orangered;
   font-size: x-large;
   font-weight: bolder;
   font-style: italic;
+}
+.v-btn {
+  padding: 0 6px !important;
+  min-width: 0 !important;
 }
 </style>

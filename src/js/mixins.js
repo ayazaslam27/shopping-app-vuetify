@@ -22,7 +22,7 @@ export const eventMixin = {
   },
   methods: {
     update() {
-      if (window.outerWidth < 1000) {
+      if (window.outerWidth < 813) {
         this.showCart = false;
         this.$store.dispatch("setAppVersion", true);
       } else {
