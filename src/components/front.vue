@@ -1,11 +1,14 @@
 <template>
-  <v-layout :class="[mobileVersion? 'column': 'row']" justify-space-between>
-    <v-flex xs3 :class="[mobileVersion? 'order-2': 'order-1']">
+  <v-layout class="pt-2">
+    <v-flex :class="[mobileVersion? 'order-2': 'order-1']">
       <SideBar :style="openSideMenuStyle"/>
     </v-flex>
-    <v-flex xs10 :class="[mobileVersion? 'order-1': 'order-2']">
-      <router-view></router-view>
-    </v-flex>
+
+    <v-layout :class="[mobileVersion? 'column order-1': 'row order-2']">
+      <v-flex xs12>
+        <router-view></router-view>
+      </v-flex>
+    </v-layout>
   </v-layout>
 </template>
 

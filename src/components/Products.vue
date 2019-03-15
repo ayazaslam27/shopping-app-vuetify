@@ -1,18 +1,26 @@
 ﻿<template>
-  <section>
+  <v-layout column>
     <template v-for="(item, index) in reativeItems">
-      <banner :item="item" :key="index + 'PB'"></banner>
+      <v-container fluid grid-list-md :key="index + 'PB'">
+        <v-card class="card" d-flex>
+          <banner :item="item"></banner>
+        </v-card>
+      </v-container>
     </template>
-
-    <div v-if="reativeItems.length > 0" class="mt-3 text-center">
-      <!-- <b-pagination
-        align="center"
-        :total-rows="totalItems"
-        v-model="currentPage"
-        :per-page="params.limit"
-      />-->
+    <div class="text-xs-center" v-if="reativeItems.length > 0">
+      <v-container>
+        <v-layout justify-center>
+          <v-flex xs8>
+            <v-pagination
+              circle
+              v-model="currentPage"
+              :length="Math.round(totalItems/params.limit)"
+            ></v-pagination>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </div>
-  </section>
+  </v-layout>
 </template>
 
 <script>

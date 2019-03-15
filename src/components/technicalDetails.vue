@@ -1,25 +1,26 @@
 <template>
-  <table v-if="flattenArray.length > 0" class="table">
-    <tbody>
-      <thead>
-        <th scope="col"></th>
-        <th scope="col"></th>
-      </thead>
-        <tr :key="index + 'TD'" v-for="(item, index) in flattenArray">
-          <th :class="item.header ? 'header': ''" scope="row">{{item.name}}</th>
-          <td v-if="item.value != true && item.value != false">{{item.value}}</td>
-           <td v-else-if="item.value == true && !item.header">
-             <i class="fas fa-check"></i>
-           </td>
-           <td v-else-if="!item.header">
-             <i class="fas fa-times"></i>
-           </td>
-           <td v-else>
-            
-           </td>
-        </tr>
-    </tbody>
-  </table> 
+  <v-data-table
+    hide-actions
+    hide-headers
+    :items="flattenArray"
+    :rowsPerPage="-1"
+    class="elevation-1"
+  >
+    <template v-slot:items="props">
+      <td>{{ props.item.name }}</td>
+      <td
+        class="text-xs-right"
+        v-if="props.item.value != true && props.item.value != false"
+      >{{ props.item.value }}</td>
+      <td class="text-xs-right" v-else-if="props.item.value == true && !props.item.header">
+        <v-icon>done</v-icon>
+      </td>
+      <td class="text-xs-right" v-else-if="!props.item.header">
+        <v-icon>close</v-icon>
+      </td>
+      <td v-else></td>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
@@ -52,34 +53,34 @@ export default {
           Format: "M2"
         }
       },
-      index: 0,   
-      array: []  
+      index: 0,
+      array: []
     };
   },
   computed: {
-    flattenArray(){
-      this.flattenObject(this.details)
+    flattenArray() {
+      this.flattenObject(this.details);
       return this.array;
-    }      
+    }
   },
-  methods:{
-    flattenObject(details) { 
+  methods: {
+    flattenObject(details) {
       Object.keys(details).forEach(key => {
         this.array.push({
           name: key,
-          value: ' ',
+          value: " ",
           header: false
         });
-        
+
         let value = details[key];
         if (typeof value !== "object") {
-          this.array[this.array.length - 1].value = value;         
+          this.array[this.array.length - 1].value = value;
         } else {
-           this.array[this.array.length - 1].header = true;     
+          this.array[this.array.length - 1].header = true;
           this.flattenObject(value);
         }
       });
-    },
+    }
   }
 };
 </script>

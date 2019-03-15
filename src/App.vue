@@ -75,7 +75,7 @@ export default {
     }
   },
   components: {
-    navigation,
+    navigation
   },
   mixins: [eventMixin]
 };

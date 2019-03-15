@@ -1,22 +1,18 @@
 <template>
-  <section class="imageSlider">
+  <v-layout ref="imageSlider" column class="imageSlider">
     <div class="image-show">
-      <img class="w-100" :src="imageSource">
+      <v-img :src="imageSource" aspect-ratio="1"></v-img>
     </div>
-    <div class="d-flex flex-row justify-content-center">
-      <div class="order-1 bg-light navigation" @click="prevSlide">
-        <i class="fas fa-caret-left pt-3 px-1"></i>
-      </div>
-      <div ref="imageSlider" class="slider-list order-2">
+    <v-layout row>
+      <v-icon class="navigation-button pre" @click="prevSlide">navigate_before</v-icon>
+      <div class="slider-list order-2">
         <ul ref="imagetrack" class="imagetrack" :style="trackTransform">
           <slot></slot>
         </ul>
       </div>
-      <div class="order-3 bg-light navigation" @click="nextSlide">
-        <i class="fas fa-caret-right pt-3 px-1"></i>
-      </div>
-    </div>
-  </section>
+      <v-icon class="navigation-button next" @click="nextSlide">navigate_next</v-icon>
+    </v-layout>
+  </v-layout>
 </template>
 
 
@@ -63,7 +59,8 @@ export default {
       this.updateWidth();
     },
     updateWidth() {
-      let trackWidth = this.$refs.imageSlider.clientWidth;
+      let trackWidth =
+        this.$refs.imageSlider.clientWidth + this.$refs.imageSlider.offsetLeft;
       this.slideWidth = trackWidth / this.itemsToShow;
 
       this.slides.forEach(slide => {
@@ -103,6 +100,18 @@ export default {
 .navigation {
   height: 3.2em;
   cursor: pointer;
+}
+.navigation-button {
+  height: 100% !important;
+  background: lightgray;
+}
+.pre {
+  border-bottom-left-radius: 10px;
+  border-top-left-radius: 10px;
+}
+.next {
+  border-bottom-right-radius: 10px;
+  border-top-right-radius: 10px;
 }
 </style>
 

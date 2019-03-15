@@ -1,53 +1,44 @@
 <template>
-  <div class="products d-flex" :class="[isMobileVersion? 'flex-column': 'flex-row']">
-    <div :class="[isMobileVersion? 'col-12': 'col-9']" class="d-flex">
+  <v-layout d-flex :class="[isMobileVersion ? 'column': 'row']" wrap xs12>
+    <v-flex :class="[isMobileVersion? 'xs12': 'xs8']" d-flex>
       <router-link
         :to="{ name: 'detail-article', params: { brand: item.brand,  id: item.articleNumber }}"
-        class="h-100"
       >
-        <div class="d-flex flex-row main_link">
-          <img
-            class="col-4"
-            :width="[isMobileVersion? '225': '195']"
-            :height="[isMobileVersion? '145': '195']"
-            :src="item.imgSource"
-          >
-          <div class="d-flex flex-column pt-4 col-8">
-            <span>{{item.title}}</span>
-            <div class="stars-outer">
-              <div
-                class="stars-inner"
-                :style="[{'width': `${Math.round((this.item.rating / 5) * 100)}%`}]"
-              ></div>
-            </div>
-            <span v-if="!isMobileVersion" class="short_description">{{item.description}}</span>
-          </div>
-        </div>
+        <v-layout row class="main_link">
+          <v-flex :class="[isMobileVersion ? 'xs12': 'px-3 xs5']">
+            <v-img :src="item.imgSource" aspect-ration="1"></v-img>
+          </v-flex>
+
+          <v-layout xs7 column>
+            <v-flex class="pb-5">
+              <span>{{item.title}}</span>
+              <v-rating v-model="item.rating"></v-rating>
+              <span v-if="!isMobileVersion" class="short_description">{{item.description}}</span>
+            </v-flex>
+          </v-layout>
+        </v-layout>
       </router-link>
-    </div>
-    <div
-      :class="[isMobileVersion? 'col-12': 'col-3 pt-4']"
-      class="right d-flex flex-column d-inline-block"
-    >
-      <div v-if="!isMobileVersion" class="availability flex-column d-flex pb-1">
-        <span class="availability pb-1">sofort ab Lager</span>
+    </v-flex>
+    <v-layout column :class="[isMobileVersion? 'xs12': 'xs4 pt-3']">
+      <v-layout row>
+        <span class="availability pb-1">sofort ab Lager</span>/
         <span class="highlight_red pb-1">24h Express</span>
-      </div>
-      <div class="pb-1" :class="[isMobileVersion? 'float-right d-flex justify-content-end':'']">
+      </v-layout>
+      <v-flex d-flex class="pb-1">
         <span class="dp-inbl numeric-field">{{item.price}} €</span>
-      </div>
-      <div v-if="!isMobileVersion" class="savings pb-1">
+      </v-flex>
+      <v-flex v-if="!isMobileVersion" class="pb-1">
         <div class="numeric-field old-price">Regular: {{item.oldPrice}} €</div>
-      </div>
-      <div
+      </v-flex>
+      <v-flex
         v-if="!isMobileVersion"
-        class="savings_amount highlight_red pb-1 numeric-field"
-      >Ersparnis: {{item.oldPrice - item.price}} € ({{Math.round(((item.oldPrice - item.price) / item.oldPrice)* 100)}}%)</div>
-      <div class="add_to_basket mt-1 mb-3">
-        <button class="btn we-sell-button w-100" @click="addToCart">Add to Cart</button>
-      </div>
-    </div>
-  </div>
+        class="pb-1 numeric-field"
+      >Ersparnis: {{item.oldPrice - item.price}} € ({{Math.round(((item.oldPrice - item.price) / item.oldPrice)* 100)}}%)</v-flex>
+      <v-flex class="add_to_basket mt-1 mb-3">
+        <v-btn class="btn we-sell-button w-100" @click="addToCart">Add to Cart</v-btn>
+      </v-flex>
+    </v-layout>
+  </v-layout>
 </template>
 
 <script>
@@ -85,7 +76,7 @@ a:hover {
 }
 
 .short_description {
-  font-size: x-small;
+  font-size: small;
 }
 .right {
   font-size: small;

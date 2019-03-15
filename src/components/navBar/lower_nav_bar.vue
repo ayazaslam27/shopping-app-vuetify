@@ -1,35 +1,27 @@
 <template>
-  <section class="d-flex flex-row justify-content-between bg-light my-2">
-    <div>
-      <router-link :to="{name: ''}">
-        <span class="lower-navigation-item">Company</span>
-      </router-link>
-    </div>
+  <v-card>
+    <v-bottom-nav color="primary" :value="true" absolute dark shift>
+      <v-btn dark>
+        <span>Customer Service</span>
+        <v-icon>alarm</v-icon>
+      </v-btn>
 
-    <div>
-      <router-link :to="{name: ''}">
-        <span class="lower-navigation-item">Customer Service</span>
-      </router-link>
-    </div>
+      <v-btn dark>
+        <span>Careers</span>
+        <v-icon>group</v-icon>
+      </v-btn>
 
-    <div>
-      <router-link :to="{name: ''}">
-        <span class="lower-navigation-item">Careers</span>
-      </router-link>
-    </div>
+      <v-btn dark>
+        <span>Returns</span>
+        <v-icon>cached</v-icon>
+      </v-btn>
 
-    <div>
-      <router-link :to="{name: ''}">
-        <span class="lower-navigation-item">FAQ</span>
-      </router-link>
-    </div>
-
-    <div>
-      <router-link :to="{name: ''}">
-        <span class="lower-navigation-item">Returns</span>
-      </router-link>
-    </div>
-  </section>
+      <v-btn dark>
+        <span>Help</span>
+        <v-icon>help_outline</v-icon>
+      </v-btn>
+    </v-bottom-nav>
+  </v-card>
 </template>
 
 <script>
@@ -37,9 +29,3 @@ export default {
   name: "lower-nav-bar"
 };
 </script>
-
-<style>
-.lower-navigation-item {
-  color: orangered;
-}
-</style>

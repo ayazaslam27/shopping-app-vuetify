@@ -35,7 +35,7 @@ export default {
       allSlides: [],
       defaults: {},
       delta: { x: 0, y: 0 },
-      itemsToShow: 3
+      itemsToShow: 1
     };
   },
   props: {
@@ -104,8 +104,16 @@ export default {
 
       window.addEventListener("resize", this.update);
     },
-    update() {      
+    update() {
+      this.updateItemsToShow();
       this.updateWidth();
+    },
+    updateItemsToShow() {
+      if (window.outerWidth < 720) {
+        this.itemsToShow = 1;
+      } else {
+        this.itemsToShow = 3;
+      }
     },
     gotoSlide(slideIndex) {
       let index = this.settings.infiniteScroll
@@ -141,7 +149,7 @@ export default {
       this.gotoSlide(this.currentSlide - this.settings.itemsToSlide);
     },
     updateWidth() {
-      if(this.$refs.sliderList === undefined){
+      if (this.$refs.sliderList === undefined) {
         return;
       }
 

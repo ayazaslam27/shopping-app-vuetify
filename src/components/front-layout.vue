@@ -1,38 +1,44 @@
 <template>
-  <section>
+  <v-layout column>
     <carousel :title="'Top Products'"></carousel>
     <carousel :title="'Weekly offers'"></carousel>
 
-    <section class="d-flex flex-column col-12">
-      <div v-if="!mobileVersion" class="h4 d-flex justify-content-center minor-heading">Brands</div>
-      <div v-if="!mobileVersion" class="d-flex flex-row justify-content-between my-4 col-12">
-        <router-link :to="{name: ''}" class="mx-2">
-          <i class="fab fa-windows microsoft-icon mega-icon"></i>
-        </router-link>
-        <router-link :to="{name: ''}" class="mx-1">
-          <i class="fab fa-apple mega-icon"></i>
-        </router-link>
-        <router-link :to="{name: ''}" class="mx-1">
-          <img src="https://img.icons8.com/color/100/000000/dell.png">
-        </router-link>
-        <router-link :to="{name: ''}" class="mx-1">
-          <img src="https://img.icons8.com/color/96/000000/hp.png">
-        </router-link>
-        <router-link :to="{name: ''}" class="mx-1">
-          <img width="100" src="../assets/Lenovo.png">
-        </router-link>
-        <router-link :to="{name: ''}" class="mx-1">
-          <img class="mt-4" width="100" src="../assets/msi.png">
-        </router-link>
-        <router-link :to="{name: ''}" class="mx-1">
-          <img width="100" src="../assets/samsung.png">
-        </router-link>
-      </div>
+    <v-container>
+      <v-layout column>
+        <v-flex xs12 v-if="!mobileVersion" class="text-xs-center minor-heading">Brands</v-flex>
+        <v-layout d-flex xs12 row v-if="!mobileVersion" class="my-4">
+          <router-link :to="{name: ''}" class="mx-2">
+            <i class="fab fa-windows microsoft-icon mega-icon"></i>
+          </router-link>
+          <router-link :to="{name: ''}" class="mx-1">
+            <i class="fab fa-apple mega-icon"></i>
+          </router-link>
+          <router-link :to="{name: ''}" class="mx-1">
+            <img src="https://img.icons8.com/color/100/000000/dell.png">
+          </router-link>
+          <router-link :to="{name: ''}" class="mx-1">
+            <img src="https://img.icons8.com/color/96/000000/hp.png">
+          </router-link>
+          <router-link :to="{name: ''}" class="mx-1">
+            <img width="100" src="../assets/Lenovo.png">
+          </router-link>
+          <router-link :to="{name: ''}" class="mx-1">
+            <img class="mt-4" width="100" src="../assets/msi.png">
+          </router-link>
+          <router-link :to="{name: ''}" class="mx-1">
+            <img width="100" src="../assets/samsung.png">
+          </router-link>
+        </v-layout>
+      </v-layout>
 
-      <div class="d-flex flex-row justify-content-between my-4 col-12">
-        <div class="d-flex flex-column col-4">
-          <span class="minor-heading justify-content-center d-flex">Fast Delivery</span>
-          <div>
+      <v-layout row>
+        <v-layout column xs4>
+          <v-flex
+            xs12
+            v-if="!mobileVersion"
+            class="text-xs-center minor-heading-small"
+          >Fast Delivery</v-flex>
+          <v-layout d-flex xs12 row v-if="!mobileVersion" class="my-4">
             <router-link :to="{name: ''}" class="mx-2">
               <img width="70" src="../assets/dhl.png">
             </router-link>
@@ -42,12 +48,16 @@
             <router-link :to="{name: ''}" class="ml-1 mt-2">
               <img width="50" src="../assets/ups.png">
             </router-link>
-          </div>
-        </div>
+          </v-layout>
+        </v-layout>
 
-        <div class="d-flex flex-column col-4 order-2">
-          <span class="minor-heading justify-content-center d-flex">Payment Options</span>
-          <div>
+        <v-layout column xs4>
+          <v-flex
+            xs12
+            v-if="!mobileVersion"
+            class="text-xs-center minor-heading-small"
+          >Payment Options</v-flex>
+          <v-layout d-flex xs12 row v-if="!mobileVersion" class="my-4">
             <router-link :to="{name: ''}" class="mx-2">
               <img width="70" src="../assets/paypal.png">
             </router-link>
@@ -63,12 +73,12 @@
             <router-link :to="{name: ''}" class="mx-1 my-3">
               <img width="70" src="../assets/sepa.png">
             </router-link>
-          </div>
-        </div>
+          </v-layout>
+        </v-layout>
 
-        <div class="d-flex flex-column col-4 order-3">
-          <span class="minor-heading justify-content-center d-flex">Follow us</span>
-          <div class="mt-3">
+        <v-layout column xs4>
+          <v-flex xs12 v-if="!mobileVersion" class="text-xs-center minor-heading-small">Follow us</v-flex>
+          <v-layout d-flex xs12 row v-if="!mobileVersion" class="my-4">
             <router-link :to="{name: ''}" class="mx-2">
               <i class="fab fa-facebook facebook-icon follow-icon"></i>
             </router-link>
@@ -84,12 +94,12 @@
             <router-link :to="{name: ''}" class="mx-1">
               <i class="fab fa-youtube youtube-icon follow-icon"></i>
             </router-link>
-          </div>
-        </div>
-      </div>
+          </v-layout>
+        </v-layout>
+      </v-layout>
 
       <lowernavbar></lowernavbar>
-      <div class="footer-text d-flex flex-column">
+      <div class="footer-text pt-5 d-flex flex-column">
         <span>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
         <span>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.</span>
         <span>
@@ -98,9 +108,9 @@
           1914 translation by H. Rackham
           "But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant pleasure?"
         </span>
-      </div>
-    </section>
-  </section>
+      </div>-->
+    </v-container>
+  </v-layout>
 </template>
 
 <script>
@@ -168,5 +178,11 @@ export default {
 }
 .minor-heading {
   color: darkgray;
+  font-size: xx-large;
+}
+
+.minor-heading-small {
+  color: darkgray;
+  font-size: x-large;
 }
 </style>
