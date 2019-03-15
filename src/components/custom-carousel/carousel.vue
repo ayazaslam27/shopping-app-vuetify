@@ -8,15 +8,15 @@
 
     <slider v-if="items.length > 0" :settings="settings">
       <slide v-for="(item, index) in items" :key="index + 'S'">
-        <v-card class="card" d-flex>
+        <v-card class="card text-xs-center" d-flex>
           <router-link
             :to="{ name: 'detail-article', params: { brand: item.brand,  id: item.articleNumber }}"
           >
-            <v-layout column>
+            <v-layout column justify-space-between>
               <v-flex xs12>
-                <v-img :src="item.thumbnail" aspect-ratio="1"></v-img>
+                <v-img :src="item.thumbnail" :max-width="250" aspect-ratio="1.4"></v-img>
               </v-flex>
-              <v-flex xs12 px-3>
+              <v-flex class="title-height" xs12 px-3>
                 <div class="product-title">{{item.title}}</div>
               </v-flex>
             </v-layout>
@@ -84,6 +84,10 @@ export default {
 <style>
 .card {
   height: 100%;
+}
+.title-height {
+  height: 3em;
+  overflow: hidden;
 }
 </style>
 
