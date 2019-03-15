@@ -3,6 +3,7 @@
 var url = {
   categoriesUrl: "/category/getCategories",
   productsUrl: "/products/getProducts",
+  productUrl: "/products/getProduct",
   topProductsUrl: "/products/getTopProducts",
   totalProductsUrl: "/products/getTotalProducts",
   newUserRegisterUrl: "/user/register/",
@@ -40,6 +41,19 @@ var getTotalProducts = function(params) {
   return new Promise((resolve, reject) => {
     caller
       .get(url.totalProductsUrl, params)
+      .then(result => {
+        resolve(result);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+var getProduct = function(params) {
+  return new Promise((resolve, reject) => {
+    caller
+      .get(url.productUrl, params)
       .then(result => {
         resolve(result);
       })
@@ -104,6 +118,7 @@ var order = function(params) {
 export default {
   getCategories: getCategories,
   getProducts: getProducts,
+  getProduct: getProduct,
   getTotalProducts: getTotalProducts,
   getTopProducts: getTopProducts,
   register: register,

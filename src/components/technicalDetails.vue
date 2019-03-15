@@ -1,11 +1,5 @@
 <template>
-  <v-data-table
-    hide-actions
-    hide-headers
-    :items="flattenArray"
-    :rowsPerPage="-1"
-    class="elevation-1"
-  >
+  <v-data-table hide-headers :items="flattenArray" :rowsPerPage="-1" class="elevation-1">
     <template v-slot:items="props">
       <td>{{ props.item.name }}</td>
       <td
@@ -28,38 +22,21 @@ export default {
   name: "technical-details",
   data() {
     return {
-      details: {
-        Herstellernummer: "5JDRC",
-        EANNumber: "5397184082577",
-        Processor: {
-          TurboBoost: "3.10 GHz",
-          Cache: "3 MB",
-          Type: "Intel® Core™ i5 (7. Generation) 7200U Prozessor 2x 2,5 GHz"
-        },
-        Display: {
-          Size: '39 cm (15,6")',
-          Resolution: "1920 x 1080 Pixel (Full HD)",
-          Art: "mattes Display",
-          LED: true,
-          HDTV: "FULL HD (1080p)"
-        },
-        Ram: {
-          Size: "16GB",
-          Technology: "DDR4"
-        },
-        HardDisk: {
-          Size: "1TB",
-          Typ: "SSD",
-          Format: "M2"
-        }
-      },
       index: 0,
       array: []
     };
   },
+  props: {
+    technicalDetails: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
+  },
   computed: {
     flattenArray() {
-      this.flattenObject(this.details);
+      this.flattenObject(this.technicalDetails);
       return this.array;
     }
   },

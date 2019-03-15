@@ -1,5 +1,5 @@
 ﻿<template>
-  <v-container>
+  <v-container v-if="item">
     <v-layout column>
       <v-flex xs12 v-if="item">
         <v-flex>
@@ -43,7 +43,7 @@
       <v-container>
         <v-layout>
           <v-flex xs12>
-            <technicalDetails></technicalDetails>
+            <technicalDetails :technicalDetails="item.technical_details"></technicalDetails>
           </v-flex>
         </v-layout>
       </v-container>
@@ -54,7 +54,7 @@
 <script>
 import imageslider from "./image-carousel/imagecarousel";
 import technicalDetails from "./technicalDetails";
-
+import apiAction from "@/js/restfulApiCaller/apiActions";
 export default {
   name: "product",
   data() {
@@ -63,18 +63,19 @@ export default {
     };
   },
   mounted() {
-    let items = [
-      ...this.$store.getters.getItems,
-      ...this.$store.getters.getTopProducts
-    ];
-    this.item = items.find(
-      x =>
-        x.articleNumber == parseInt(this.$route.params.id, 10) &&
-        x.brand == this.$route.params.brand
-    );
-    if (this.item === undefined) {
-      //Todo send ajax to the server
-    }
+    let that = this;
+    let params = {
+      brand: this.$route.params.brand,
+      articleNumber: this.$route.params.id
+    };
+    apiAction
+      .getProduct(params)
+      .then(result => {
+        that.item = result;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   },
   components: {
     imageslider,
