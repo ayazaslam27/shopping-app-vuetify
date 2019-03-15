@@ -86,9 +86,6 @@ export default {
     },
     isUserLoggedIn() {
       return this.$store.getters.isUserAuthenticated;
-    },
-    mobileVersion() {
-      return this.$store.getters.isMobileVersion;
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer value="true" v-click-outside="clickedOutside">
+  <v-navigation-drawer class="sidebar" value="true" v-click-outside="clickedOutside">
     <v-list>
       <v-list-group v-for="(item, index) in menu" :key="index + '-SB'">
         <v-list-tile :to="{ name: 'main-category', params: {category: item.Name}}" slot="activator">
@@ -36,9 +36,6 @@ export default {
   computed: {
     menu() {
       return this.$store.getters.getCategories;
-    },
-    mobileVersion() {
-      return this.$store.getters.isMobileVersion;
     }
   },
   methods: {
@@ -86,5 +83,20 @@ export default {
 <style>
 .icon {
   color: dodgerblue !important;
+}
+
+@media only screen and (max-width: 812px) {
+  .sidebar {
+    position: absolute !important;
+    top: 4.2em !important;
+    width: 250px !important;
+  }
+}
+@media only screen and (max-width: 812px) {
+  .sidebar {
+    position: absolute !important;
+    top: 4.2em !important;
+    width: 250px !important;
+  }
 }
 </style>

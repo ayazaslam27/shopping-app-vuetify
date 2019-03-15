@@ -12,15 +12,15 @@
           <router-link
             :to="{ name: 'detail-article', params: { brand: item.brand,  id: item.articleNumber }}"
           >
-            <v-layout d-flex :class="[mobileVersion ? 'column': 'row']">
-              <v-flex :class="[mobileVersion ? 'xs12': 'pl-3 xs4']">
+            <v-layout column>
+              <v-flex xs12>
                 <v-img :src="item.thumbnail" aspect-ratio="1"></v-img>
               </v-flex>
-              <v-flex :class="[mobileVersion ? 'xs12 ': 'xs8 pt-4 pr-5']">
+              <v-flex xs12 px-3>
                 <div class="product-title">{{item.title}}</div>
               </v-flex>
             </v-layout>
-            <v-layout>
+            <v-layout column>
               <v-flex xs12 pb-4>
                 <div class="text-xs-center">
                   <v-rating v-model="item.rating"></v-rating>

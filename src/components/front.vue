@@ -1,14 +1,11 @@
 <template>
-  <v-layout class="pt-2">
-    <v-flex :class="[mobileVersion? 'order-2': 'order-1']">
+  <v-layout class="pt-2" :class="[mobileVersion? 'column' : 'row']">
+    <v-flex sm3 md3 lg2>
       <SideBar :style="openSideMenuStyle"/>
     </v-flex>
-
-    <v-layout :class="[mobileVersion? 'column order-1': 'row order-2']">
-      <v-flex xs12>
-        <router-view></router-view>
-      </v-flex>
-    </v-layout>
+    <v-flex sm9 md10 lg10 px-4>
+      <router-view></router-view>
+    </v-flex>
   </v-layout>
 </template>
 
@@ -29,8 +26,8 @@ export default {
         return `transition: 0.5s; transform: translateX(0%)`;
       } else if (!this.shouldOpenSideMenu && this.mobileVersion) {
         return `transition: 0.5s; transform: translateX(-120%)`;
-      } else {
-        return "";
+      } else if (!this.mobileVersion) {
+        return `transition: 0.5s; transform: translateX(0%)`;
       }
     },
     mobileVersion() {

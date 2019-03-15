@@ -109,7 +109,9 @@ export default {
       this.updateWidth();
     },
     updateItemsToShow() {
-      if (window.outerWidth < 720) {
+      if (window.outerWidth < 963 && window.outerWidth > 509) {
+        this.itemsToShow = 2;
+      } else if (window.outerWidth < 510) {
         this.itemsToShow = 1;
       } else {
         this.itemsToShow = 3;

@@ -1,22 +1,16 @@
 <template>
   <div id="app">
     <v-app id="inspire">
-      <v-content>
-        <navigation app v-on:toggleSideMenu="toggleSideMenu"/>
-        <v-layout :class="[mobileVersion? 'column' : 'row']">
-          <sideBar class="mt-1" :style="openSideMenuStyle"/>
-          <v-flex :class="[mobileVersion? 'xs12' : 'xs10']" pt-4>
-            <!-- <router-view></router-view> -->
-          </v-flex>
-        </v-layout>
-      </v-content>
+      <navigation app v-on:toggleSideMenu="toggleSideMenu"/>
+      <v-layout>
+        <router-view :shouldOpenSideMenu="showSideMenu"></router-view>
+      </v-layout>
     </v-app>
   </div>
 </template>
 
 <script>
 import navigation from "@/components/navBar/navBar.vue";
-import sideBar from "@/components/sideMenu/sideBar.vue";
 import apiActions from "./js/restfulApiCaller/apiActions";
 import jwt from "jsonwebtoken";
 import "@fortawesome/fontawesome-free/css/all.css";
@@ -78,20 +72,10 @@ export default {
   computed: {
     mobileVersion() {
       return this.$store.getters.isMobileVersion;
-    },
-    openSideMenuStyle() {
-      if (this.showSideMenu && this.mobileVersion) {
-        return `transition: 0.5s; transform: translateX(0%)`;
-      } else if (!this.showSideMenu && this.mobileVersion) {
-        return `transition: 0.5s; transform: translateX(-120%)`;
-      } else if (!this.mobileVersion) {
-        return `transition: 0.5s; transform: translateX(0%)`;
-      }
     }
   },
   components: {
-    navigation,
-    sideBar
+    navigation
   },
   mixins: [eventMixin]
 };
