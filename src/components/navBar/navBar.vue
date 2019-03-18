@@ -1,55 +1,59 @@
 <template>
-  <v-toolbar>
-    <v-toolbar-side-icon class="hidden-md-and-up" v-on:click="toggleSideMenu"></v-toolbar-side-icon>
+  <v-toolbar dense :extended="$vuetify.breakpoint.sm || $vuetify.breakpoint.xs">
+    <v-layout wrap>
+      <v-flex xs2 order-sm1 class="hidden-md-and-up">
+        <v-toolbar-side-icon v-on:click="toggleSideMenu"></v-toolbar-side-icon>
+      </v-flex>
 
-    <v-toolbar-title class="white--text">
-      <router-link to="/">
-        <span class="brand-heading">We Sell</span>
-      </router-link>
-    </v-toolbar-title>
-    <v-spacer></v-spacer>
+      <v-flex xs6 sm8 md7 order-sm2 pt-2>
+        <v-toolbar-title class="white--text">
+          <router-link to="/">
+            <span class="brand-heading">We Sell</span>
+          </router-link>
+        </v-toolbar-title>
+      </v-flex>
 
-    <v-toolbar-items>
-      <v-text-field
-        class="hidden-sm-and-down pr-4"
-        prepend-icon="search"
-        placeholder="Search"
-        clearable
-        sm4
-      ></v-text-field>
+      <v-flex xs12 sm12 md3 order-xs5 order-sm5 order-md3>
+        <v-text-field class="pr-4" prepend-icon="search" placeholder="Search" clearable sm4></v-text-field>
+      </v-flex>
 
-      <v-btn flat v-if="!isUserLoggedIn" :to="{name: 'registration'}">
-        <v-icon class="icon fas fa-user-circle"></v-icon>
-        <span class="hidden-md-and-down pl-2">Account</span>
-      </v-btn>
+      <v-flex v-if="!isUserLoggedIn" xs2 sm1 md1 order-sm3 order-md4 class="navigation-link">
+        <v-btn flat :to="{name: 'registration'}">
+          <v-icon class="icon fas fa-user-circle"></v-icon>
+          <span class="hidden-md-and-down pl-2">Account</span>
+        </v-btn>
+      </v-flex>
 
-      <v-menu v-if="isUserLoggedIn">
-        <template v-slot:activator="{ on }">
-          <v-toolbar-title v-on="on" class="d-flex">
+      <v-flex v-if="isUserLoggedIn" xs2 sm1 md1 order-sm3 order-md4 class="navigation-link">
+        <v-menu :nudge-width="150">
+          <v-btn flat v-on="on" slot="activator">
             <v-icon class="icon fas fa-user-circle pr-3"></v-icon>
-            <span class="hidden-md-and-down pr-2 pt-3">{{loggedInUser.name}}</span>
-          </v-toolbar-title>
-        </template>
+            <span class="hidden-md-and-down">{{loggedInUser.name}}</span>
+          </v-btn>
 
-        <v-list flex>
-          <v-list-tile @click="goToProfile">
-            <v-list-tile-title>Profile</v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile @click="logout">
-            <v-list-tile-title>Logout</v-list-tile-title>
-          </v-list-tile>
-        </v-list>
-      </v-menu>
-      <v-btn
-        flat
-        :to="{name: 'checkout'}"
-        @mouseover.native="showCart"
-        @mouseleave.native="hideCart"
-      >
-        <v-icon class="icon fas fa-shopping-cart"></v-icon>
-        <span class="hidden-md-and-down pl-2">Cart</span>
-      </v-btn>
-    </v-toolbar-items>
+          <v-list>
+            <v-list-tile @click="goToProfile">
+              <v-list-tile-title>Profile</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="logout">
+              <v-list-tile-title>Logout</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </v-flex>
+
+      <v-flex xs2 sm1 md1 order-sm3 order-md4 class="navigation-link">
+        <v-btn
+          flat
+          :to="{name: 'checkout'}"
+          @mouseover.native="showCart"
+          @mouseleave.native="hideCart"
+        >
+          <v-icon class="icon fas fa-shopping-cart"></v-icon>
+          <span class="hidden-md-and-down pl-2">Cart</span>
+        </v-btn>
+      </v-flex>
+    </v-layout>
   </v-toolbar>
 </template>
 
@@ -100,5 +104,22 @@ export default {
 .v-btn {
   padding: 0 6px !important;
   min-width: 0 !important;
+}
+.navigation-link {
+  display: flex;
+  justify-content: center !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@media only screen and (max-width: 960px) {
+  .v-toolbar__content {
+    padding-top: 4.2em !important;
+  }
+}
+@media only screen and (min-width: 960px) {
+  .v-toolbar__content {
+    padding-top: 1.2em !important;
+  }
 }
 </style>

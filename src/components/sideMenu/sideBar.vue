@@ -84,18 +84,10 @@ export default {
 .icon {
   color: dodgerblue !important;
 }
-
-@media only screen and (max-width: 812px) {
+@media only screen and (max-width: 960px) {
   .sidebar {
     position: absolute !important;
-    top: 4.2em !important;
-    width: 250px !important;
-  }
-}
-@media only screen and (max-width: 812px) {
-  .sidebar {
-    position: absolute !important;
-    top: 4.2em !important;
+    top: 7.8em !important;
     width: 250px !important;
   }
 }

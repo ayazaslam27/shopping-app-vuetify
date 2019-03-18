@@ -12,9 +12,14 @@
           <router-link
             :to="{ name: 'detail-article', params: { brand: item.brand,  id: item.articleNumber }}"
           >
-            <v-layout column justify-space-between>
-              <v-flex xs12>
-                <v-img :src="item.thumbnail" :max-width="250" aspect-ratio="1.4"></v-img>
+            <v-layout column>
+              <v-flex xs12 sm8 class="image">
+                <v-img
+                  :src="item.thumbnail"
+                  :lazy-src="item.thumbnail"
+                  :max-width="250"
+                  aspect-ratio="1.4"
+                ></v-img>
               </v-flex>
               <v-flex class="title-height" xs12 px-3>
                 <div class="product-title">{{item.title}}</div>
@@ -88,6 +93,10 @@ export default {
 .title-height {
   height: 3em;
   overflow: hidden;
+}
+.image {
+  display: flex;
+  justify-content: center;
 }
 </style>
 

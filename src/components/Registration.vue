@@ -1,9 +1,9 @@
 <template>
-  <v-layout :class="[mobileVersion? 'column': 'row']" justify-space-between>
-    <v-flex xs6 :class="[mobileVersion? 'order-2': 'order-1']">
+  <v-layout wrap justify-space-around>
+    <v-flex md5 sm12 order-sm2 order-xs2 order-md1>
       <newuser></newuser>
     </v-flex>
-    <v-flex xs6 :class="[mobileVersion? 'order-1': 'order-2']">
+    <v-flex md5 sm12 order-sm1 order-xs1 order-md2>
       <login></login>
     </v-flex>
   </v-layout>
@@ -41,7 +41,7 @@ export default {
   padding-left: 1em;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   font-size: xx-large;
-  color: orangered;
+  color: #1976d2;
   font-weight: bold;
 }
 @media (max-width: 984px) {

@@ -1,127 +1,99 @@
 <template>
-  <section class="d-flex flex-column">
-    <div class="heading d-flex justify-content-center position-relative">
+  <v-layout column justify-center align-content-center>
+    <v-flex class="heading d-flex justify-content-center">
       <i class="fas fa-truck big-icon"></i>
       <span class="heading-title">Delivery Address</span>
-    </div>
-    <div class="d-flex flex-row py-2">
-      <label class="col-6">Same as registered address</label>
-      <input
-        type="checkbox"
-        v-model="sameAsRegisteredAddress"
-        name="sameAsRegisteredAddress"
-        class="form-check-input d-flex mt-2 position-relative"
-      >
-    </div>
-    <form @submit.prevent="submit" :class="[checkValidation ? 'valid-form': 'invalid-form']">
-      <div class="d-flex flex-row py-2">
-        <label class="col-4">Salutation</label>
-        <select
-          v-model="user.genderSelect"
-          v-validate="'required'"
-          name="genderSelect"
-          class="form-control"
-        >
-          <option
-            v-for="(option, index) in options"
-            :key="index"
-            :value="option.value"
-          >{{option.text}}</option>
-        </select>
-      </div>
+    </v-flex>
 
-      <div class="d-flex flex-row pb-2">
-        <label class="col-4">First Name</label>
-        <input
-          type="text"
+    <v-checkbox v-model="sameAsRegisteredAddress" label="Same as registered Address"></v-checkbox>
+    <v-form :class="[checkValidation? 'valid':'not-calid-form']">
+      <v-overflow-btn
+        v-model="user.genderSelect"
+        v-validate="'required'"
+        :items="options"
+        :error-messages="errors.collect('genderSelect')"
+        label="Gender"
+        data-vv-name="genderSelect"
+        required
+      ></v-overflow-btn>
+      <v-text-field
+        v-model="user.firstname"
+        v-validate="'required'"
+        :error-messages="errors.collect('firstname')"
+        label="First Name"
+        placeholder="First Name"
+        data-vv-name="firstname"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="user.lastname"
+        v-validate="'required'"
+        :error-messages="errors.collect('lastname')"
+        label="Last Name"
+        placeholder="Last Name"
+        data-vv-name="lastname"
+        required
+      ></v-text-field>
+      <v-layout row>
+        <v-text-field
+          v-model="user.streetno"
           v-validate="'required'"
-          v-model="user.firstname"
-          name="firstname"
-          class="form-control"
-        >
-      </div>
-      <div class="d-flex flex-row pb-2">
-        <label class="col-4">Last Name</label>
-        <input
+          :error-messages="errors.collect('streetno')"
+          label="Street Number"
+          placeholder="Street Number"
+          data-vv-name="streetno"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="user.houseno"
           v-validate="'required'"
-          type="text"
-          name="lastname"
-          v-model="user.lastname"
-          class="form-control"
-        >
-      </div>
-
-      <div class="d-flex flex-row pb-2">
-        <label class="col-4">Street / No</label>
-        <div class="d-flex d-inline-block justify-content-between">
-          <input
-            type="text"
-            v-validate="'required'"
-            name="streetno"
-            v-model="user.streetno"
-            class="form-control col-8"
-          >
-          <input
-            type="text"
-            v-validate="'required|numeric'"
-            name="houseno"
-            v-model="user.houseno"
-            class="form-control col-3"
-          >
-        </div>
-      </div>
-
-      <div class="d-flex flex-row pb-2">
-        <label class="col-4">PostCode / City</label>
-        <div class="d-flex flex-row justify-content-between">
-          <input
-            type="text"
-            v-validate="'required|numeric'"
-            name="postcode"
-            v-model="user.postcode"
-            class="form-control col-4"
-          >
-          <input
-            type="text"
-            v-validate="'required'"
-            name="city"
-            v-model="user.city"
-            class="form-control col-7"
-          >
-        </div>
-      </div>
-      <div class="d-flex flex-row pb-2">
-        <label class="col-4">Country</label>
-        <country-select
-          class="form-control"
+          :error-messages="errors.collect('houseno')"
+          label="House Number"
+          placeholder="House Number"
+          data-vv-name="houseno"
+          required
+        ></v-text-field>
+      </v-layout>
+      <v-layout row>
+        <v-text-field
+          v-model="user.postcode"
           v-validate="'required'"
-          name="country"
-          :country="user.country"
-          v-model="user.country"
-        />
-      </div>
-      <div class="d-flex flex-row pb-2">
-        <label class="col-4">Email</label>
-        <input
-          type="email"
-          v-validate="'required|email'"
-          name="email"
-          v-model="user.email"
-          class="form-control"
-        >
-      </div>
-      <div class="d-flex flex-row pb-2">
-        <label class="col-4">Telephone</label>
-        <input
-          type="text"
-          name="telephone"
+          :error-messages="errors.collect('postcode')"
+          label="PostCode"
+          placeholder="PostCode"
+          data-vv-name="postcode"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="user.city"
           v-validate="'required'"
-          v-model="user.telephone"
-          class="form-control"
-        >
-      </div>
-    </form>
-  </section>
+          :error-messages="errors.collect('city')"
+          label="City"
+          placeholder="City"
+          data-vv-name="city"
+          required
+        ></v-text-field>
+      </v-layout>
+      <v-text-field
+        v-model="user.country"
+        v-validate="'required'"
+        :error-messages="errors.collect('country')"
+        label="Country"
+        placeholder="Country"
+        data-vv-name="country"
+        required
+      ></v-text-field>
+      <v-text-field
+        v-model="user.email"
+        v-validate="'required|email'"
+        :error-messages="errors.collect('email')"
+        label="Email"
+        placeholder="Email"
+        data-vv-name="email"
+        required
+      ></v-text-field>
+    </v-form>
+  </v-layout>
 </template>
 
 <script>
@@ -130,9 +102,9 @@ export default {
   data() {
     return {
       options: [
-        { value: 0, text: "Male" },
-        { value: 1, text: "Female" },
-        { value: 3, text: "Not Specified" }
+        { text: "Male" },
+        { text: "Female" },
+        { text: "Not Specified" }
       ],
       sameAsRegisteredAddress: false,
       user: {
@@ -177,7 +149,7 @@ export default {
   watch: {
     sameAsRegisteredAddress(value) {
       if (value) {
-        this.user.genderSelect = 0;
+        this.user.genderSelect = "Male";
         this.user.country = "DE";
         this.user.firstname = "Ayaz";
         this.user.lastname = "Aslam";

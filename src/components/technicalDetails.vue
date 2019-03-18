@@ -1,5 +1,11 @@
 <template>
-  <v-data-table hide-headers :items="flattenArray" :rowsPerPage="-1" class="elevation-1">
+  <v-data-table
+    v-if="technicalDetails"
+    hide-headers
+    :items="flattenArray"
+    :rowsPerPage="-1"
+    class="elevation-1"
+  >
     <template v-slot:items="props">
       <td>{{ props.item.name }}</td>
       <td
@@ -28,15 +34,16 @@ export default {
   },
   props: {
     technicalDetails: {
-      type: Array,
-      default() {
-        return [];
-      }
+      type: Object,
+      default: null
     }
   },
   computed: {
     flattenArray() {
-      this.flattenObject(this.technicalDetails);
+      if (this.technicalDetails) {
+        this.flattenObject(this.technicalDetails);
+      }
+
       return this.array;
     }
   },

@@ -1,18 +1,18 @@
 <template>
-  <v-layout ref="imageSlider" column class="imageSlider">
-    <div class="image-show">
+  <v-flex ref="imageSlider" class="imageSlider">
+    <v-flex class="image-show">
       <v-img :src="imageSource" aspect-ratio="1"></v-img>
-    </div>
-    <v-layout row>
+    </v-flex>
+    <v-layout>
       <v-icon class="navigation-button pre" @click="prevSlide">navigate_before</v-icon>
-      <div class="slider-list order-2">
+      <v-flex class="slider-list">
         <ul ref="imagetrack" class="imagetrack" :style="trackTransform">
           <slot></slot>
         </ul>
-      </div>
+      </v-flex>
       <v-icon class="navigation-button next" @click="nextSlide">navigate_next</v-icon>
     </v-layout>
-  </v-layout>
+  </v-flex>
 </template>
 
 
@@ -97,12 +97,7 @@ export default {
   padding: 0;
   margin: 0;
 }
-.navigation {
-  height: 3.2em;
-  cursor: pointer;
-}
 .navigation-button {
-  height: 100% !important;
   background: lightgray;
 }
 .pre {

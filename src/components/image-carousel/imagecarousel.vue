@@ -2,9 +2,7 @@
   <slider :imageUrl="firstImage">
     <template v-for="(item, index) in images">
       <slide :item="item" :key="index + '-IS'">
-        <v-flex>
-          <v-img :src="item.imageUrl" aspect-ratio="1"></v-img>
-        </v-flex>
+        <v-img :src="item.imageUrl" aspect-ratio="1"></v-img>
       </slide>
     </template>
   </slider>

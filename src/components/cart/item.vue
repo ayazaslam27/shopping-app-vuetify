@@ -1,22 +1,24 @@
 <template>
-  <div v-if="item.quantity > 0" class="d-flex flex-row pb-2">
-    <div class="float-left ml-2 mt-2">
-      <img class="float-left" :src="item.thumbnail">
-    </div>
-    <div class="float-right d-flex flex-column">
-      <span v-if="shortName" class="ml-2 mr-2">{{getShortName()}}</span>
-      <span v-else class="ml-2">{{item.title}}</span>
-      <div class="d-flex flex-row justify-content-between">
-        <div class="ml-2 my-2">
-          <span>Quantity:</span>
-          <i @click="minus(item)" class="fas fa-minus mx-2"></i>
-          <span class="numeric-field">{{item.quantity}}</span>
-          <i @click="add(item)" class="fas fa-plus mx-2"></i>
-        </div>
-        <span class="numeric-field mt-2 mr-2">{{item.price}} €</span>
-      </div>
-    </div>
-  </div>
+  <v-layout row py-4 v-if="item.quantity > 0" justify-space-between>
+    <v-flex xs3>
+      <v-img aspect-ratio="1" :max-width="100" :src="item.thumbnail"></v-img>
+    </v-flex>
+    <v-flex xs9>
+      <v-layout column>
+        <v-flex v-if="shortName">{{getShortName()}}</v-flex>
+        <v-flex v-else>{{item.title}}</v-flex>
+        <v-layout row justify-space-between>
+          <v-flex>
+            <span>Quantity:</span>
+            <i @click="minus(item)" class="fas fa-minus mx-2"></i>
+            <span class="numeric-field">{{item.quantity}}</span>
+            <i @click="add(item)" class="fas fa-plus mx-2"></i>
+          </v-flex>
+          <v-flex class="numeric-field mt-2 mr-2">{{item.price}} €</v-flex>
+        </v-layout>
+      </v-layout>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
@@ -56,19 +58,13 @@ export default {
 <style>
 .numeric-field {
   font-size: larger;
-  color: orangered;
+  color: #1976d2;
   font-weight: bolder;
   font-style: italic;
 }
 .cart-title {
   font-size: large;
   font-weight: bold;
-}
-.numeric-field-small {
-  font-size: small;
-  color: orangered;
-  font-weight: bolder;
-  font-style: italic;
 }
 
 .cart-item {

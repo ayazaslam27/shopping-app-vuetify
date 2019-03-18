@@ -1,31 +1,33 @@
 <template>
   <v-layout column :class="[mobileVersion?'px-5':'px-3']">
-    <div class="heading d-flex justify-content-center position-relative">
-      <i class="fas fa-user big-icon"></i>
-      <span class="heading-title">I am already a Customer</span>
-    </div>
-    <form>
-      <v-text-field
-        v-model="user.username"
-        v-validate="'required'"
-        :error-messages="errors.collect('username')"
-        label="username"
-        placeholder="username"
-        data-vv-name="username"
-        required
-      ></v-text-field>
-      <v-text-field
-        type="password"
-        v-model="user.password"
-        v-validate="'required'"
-        placeholder="password"
-        :error-messages="errors.collect('password')"
-        label="password"
-        data-vv-name="password"
-        required
-      ></v-text-field>
-      <v-btn @click="onSubmit">Login</v-btn>
-    </form>
+    <v-flex xs12>
+      <div class="heading d-flex justify-content-center position-relative">
+        <i class="fas fa-user big-icon"></i>
+        <span class="heading-title">I am already a Customer</span>
+      </div>
+      <form>
+        <v-text-field
+          v-model="user.username"
+          v-validate="'required'"
+          :error-messages="errors.collect('username')"
+          label="username"
+          placeholder="username"
+          data-vv-name="username"
+          required
+        ></v-text-field>
+        <v-text-field
+          type="password"
+          v-model="user.password"
+          v-validate="'required'"
+          placeholder="password"
+          :error-messages="errors.collect('password')"
+          label="password"
+          data-vv-name="password"
+          required
+        ></v-text-field>
+        <v-btn class="custom-button" outline color="primary" @click="onSubmit">Login</v-btn>
+      </form>
+    </v-flex>
   </v-layout>
 </template>
 

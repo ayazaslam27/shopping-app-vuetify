@@ -1,21 +1,21 @@
 <template>
-  <section class="flex-column">
-    <div class="heading d-flex justify-content-center position-relative">
+  <v-layout column justify-center>
+    <v-flex class="heading d-flex justify-content-center">
       <i class="fas fa-shopping-cart big-icon"></i>
       <span class="heading-title">Basket</span>
-    </div>
+    </v-flex>
     <template v-for="(item, index) in items">
       <item :key="index + 'CI'" :item="item"></item>
     </template>
 
     <template v-if="totalCost > 0">
-      <div class="d-flex flex-column total-cost">
+      <v-layout column class="total-cost" justify-end>
         <div class="d-flex justify-content-end">
-          <span class="numeric-field">Total: {{totalCost}} €</span>
+          <span class="numeric-field total text-xs-right">Total: {{totalCost}} €</span>
         </div>
-      </div>
+      </v-layout>
     </template>
-  </section>
+  </v-layout>
 </template>
 
 <script>
@@ -47,7 +47,7 @@ export default {
           total: sum,
           products: this.items
         });
-      }else{
+      } else {
         this.$emit("validated", false);
       }
       return sum;

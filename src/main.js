@@ -16,9 +16,11 @@ Vue.use(VeeValidate, {
 });
 
 import Vuetify from "vuetify";
-
-Vue.use(Vuetify);
 import "vuetify/dist/vuetify.min.css";
+import "@mdi/font/css/materialdesignicons.css"; //
+Vue.use(Vuetify, {
+  iconfont: "mdi"
+});
 
 Vue.config.productionTip = false;
 

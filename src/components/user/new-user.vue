@@ -134,7 +134,7 @@
             type="checkbox"
             required
         ></v-checkbox>
-        <v-btn @click="onSubmit" :disabled="!valid">Register</v-btn>
+        <v-btn  class="custom-button" outline color="primary" @click="onSubmit" :disabled="!valid">Register</v-btn>
       </v-form>
     </v-flex>
   </v-layout>

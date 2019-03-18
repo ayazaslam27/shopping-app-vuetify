@@ -1,13 +1,13 @@
 <template>
-  <section class="d-flex flex-column">
-    <div class="heading d-flex justify-content-center">
+  <v-layout column justify-center>
+    <v-flex class="heading d-flex justify-content-center">
       <i class="far fa-money-bill-alt big-icon"></i>
       <span class="heading-title">Payment Options</span>
-    </div>
-    <div class="d-flex flex-row pt-4 justify-content-center align-items-center">
+    </v-flex>
+    <v-flex class="d-flex flex-row pt-4 justify-content-center align-items-center">
       <div :disabled="!enable" class="paypal-button-container"></div>
-    </div>
-  </section>
+    </v-flex>
+  </v-layout>
 </template>
 <script>
 export default {

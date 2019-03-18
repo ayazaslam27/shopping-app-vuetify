@@ -1,30 +1,31 @@
 <template>
-  <section class="d-flex flex-column col-12">
-    <div class="d-flex" :class="[mobileVersion? 'flex-column':'flex-row']">
-      <addressform
-        v-if="!showPaymentSection"
-        class="d-flex"
-        v-on:broadCastAddress="recieveAddress"
-        v-on:validated="isAddressFormValidated"
-        :class="[mobileVersion? 'col-12 order-2':'col-6 order-1']"
-      ></addressform>
-      <basket
-        class="d-flex"
-        v-if="!showPaymentSection"
-        v-on:broadCastBasketItemsEvent="recieveBasketItems"
-        v-on:validated="isBasketValidated"
-        :class="[mobileVersion? 'col-12 order-1':'col-6 order-2']"
-      ></basket>
-    </div>
-
-    <div class="d-flex justify-content-end pt-4">
-      <router-link
-        :to="{name: 'order'}"
-        v-bind:class="{ disabled: !canBuy }"
-        class="btn custom-button w-25"
-      >Buy</router-link>
-    </div>
-  </section>
+  <v-layout pt-4 column>
+    <v-layout wrap justify-center>
+      <v-flex md5 sm11 order-sm2 order-xs2 order-md1 px-3>
+        <addressform
+          v-if="!showPaymentSection"
+          v-on:broadCastAddress="recieveAddress"
+          v-on:validated="isAddressFormValidated"
+        ></addressform>
+      </v-flex>
+      <v-flex md5 sm11 order-sm1 order-xs1 order-md2 px-3>
+        <basket
+          v-if="!showPaymentSection"
+          v-on:broadCastBasketItemsEvent="recieveBasketItems"
+          v-on:validated="isBasketValidated"
+        ></basket>
+      </v-flex>
+      <v-flex md5 order-sm3 order-xs3 order-md3>
+        <v-btn
+          class="custom-button"
+          outline
+          color="primary"
+          :to="{name: 'order'}"
+          :disabled="!canBuy"
+        >Continue</v-btn>
+      </v-flex>
+    </v-layout>
+  </v-layout>
 </template>
 
 <script>
