@@ -11,8 +11,14 @@
     commit("SET_MENU", menu);
   },
 
-  setCartItem({ commit }, item) {
-    commit("SET_CARTITEM", item);
+  addToCart({ commit }, item) {
+    commit("ADD_TO_CART", item);
+    commit("UPDATE_TOTAL_ITEMS_IN_CART", "increment");
+  },
+
+  removeFromCart({ commit }, item) {
+    commit("REMOVE_FROM_CART", item);
+    commit("UPDATE_TOTAL_ITEMS_IN_CART", "decrement");
   },
 
   setTopProducts({ commit }, topProducts) {
@@ -40,7 +46,8 @@ export default {
   setCategories: actions.setCategories,
   setItems: actions.setItems,
   setMenu: actions.setMenu,
-  setCartItem: actions.setCartItem,
+  addToCart: actions.addToCart,
+  removeFromCart: actions.removeFromCart,
   setTopProducts: actions.setTopProducts,
   setUserAuthentication: actions.setUserAuthentication,
   setUserInfo: actions.setUserInfo,

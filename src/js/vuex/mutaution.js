@@ -12,7 +12,7 @@ var mutations = {
     state.menu = menu;
   },
 
-  SET_CARTITEM(state, item) {
+  ADD_TO_CART(state, item) {
     var filteredItem = state.cartItems.find(
       x => x.articleNumber == item.articleNumber && x.brand == item.brand
     );
@@ -21,6 +21,28 @@ var mutations = {
     } else {
       Vue.set(item, "quantity", 1);
       state.cartItems.push(item);
+    }
+  },
+
+  REMOVE_FROM_CART(state, item) {
+    var filteredItem = state.cartItems.find(
+      x => x.articleNumber == item.articleNumber && x.brand == item.brand
+    );
+    if (filteredItem.quantity > 1) {
+      filteredItem.quantity = filteredItem.quantity - 1;
+    } else {
+      let index = state.cartItems.indexOf(filteredItem);
+      if (index > -1) {
+        state.cartItems.splice(index, 1);
+      }
+    }
+  },
+
+  UPDATE_TOTAL_ITEMS_IN_CART(state, action) {
+    if (action == "increment") {
+      state.totalCartItems = state.totalCartItems + 1;
+    } else if (action == "decrement" && state.totalCartItems > 0) {
+      state.totalCartItems = state.totalCartItems - 1;
     }
   },
 
@@ -49,7 +71,9 @@ export default {
   SET_CATEGORIES: mutations.SET_CATEGORIES,
   SET_ITEMS: mutations.SET_ITEMS,
   SET_MENU: mutations.SET_MENU,
-  SET_CARTITEM: mutations.SET_CARTITEM,
+  ADD_TO_CART: mutations.ADD_TO_CART,
+  REMOVE_FROM_CART: mutations.REMOVE_FROM_CART,
+  UPDATE_TOTAL_ITEMS_IN_CART: mutations.UPDATE_TOTAL_ITEMS_IN_CART,
   SET_TOPPRODUCTS: mutations.SET_TOPPRODUCTS,
   SET_AUTHENTICATION: mutations.SET_AUTHENTICATION,
   SET_USER_INFO: mutations.SET_USER_INFO,

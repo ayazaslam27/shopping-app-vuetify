@@ -1,21 +1,21 @@
 <template>
   <v-layout pt-4 column>
     <v-layout wrap justify-center>
-      <v-flex md5 sm11 order-sm2 order-xs2 order-md1 px-3>
+      <v-flex v-if="hasItemsInBasket" md5 sm11 order-sm2 order-xs2 order-md1 px-3>
         <addressform
           v-if="!showPaymentSection"
           v-on:broadCastAddress="recieveAddress"
           v-on:validated="isAddressFormValidated"
         ></addressform>
       </v-flex>
-      <v-flex md5 sm11 order-sm1 order-xs1 order-md2 px-3>
+      <v-flex v-if="hasItemsInBasket" md5 sm11 order-sm1 order-xs1 order-md2 px-3>
         <basket
           v-if="!showPaymentSection"
           v-on:broadCastBasketItemsEvent="recieveBasketItems"
           v-on:validated="isBasketValidated"
         ></basket>
       </v-flex>
-      <v-flex md5 order-sm3 order-xs3 order-md3>
+      <v-flex v-if="hasItemsInBasket" md5 order-sm3 order-xs3 order-md3>
         <v-btn
           class="custom-button"
           outline
@@ -23,6 +23,14 @@
           :to="{name: 'order'}"
           :disabled="!canBuy"
         >Continue</v-btn>
+      </v-flex>
+      <v-flex v-if="!hasItemsInBasket" xs10 sm6 md5 class="text-xs-center">
+        <v-alert
+          :value="true"
+          color="warning"
+          icon="far fa-frown"
+          outline
+        >Basket is empty. You have no products to buy.</v-alert>
       </v-flex>
     </v-layout>
   </v-layout>
@@ -49,7 +57,6 @@ export default {
         user: null
       },
       addressFormValidated: false,
-      hasItemsInBasket: false,
       showPaymentSection: false
     };
   },
@@ -68,6 +75,9 @@ export default {
     },
     mobileVersion() {
       return this.$store.getters.isMobileVersion;
+    },
+    hasItemsInBasket() {
+      return this.$store.getters.getTotalCartItems > 0;
     }
   },
   mounted() {
@@ -109,7 +119,6 @@ export default {
       if (!value) this.showPaymentSection = false;
     },
     isBasketValidated(value) {
-      this.hasItemsInBasket = value;
       if (!value) this.showPaymentSection = false;
     },
     canOrder() {

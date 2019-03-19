@@ -3,6 +3,7 @@
   items: [],
   topProducts: [],
   cartItems: [],
+  totalCartItems: 0,
   isAuthenticated: false,
   user: {
     name: null,

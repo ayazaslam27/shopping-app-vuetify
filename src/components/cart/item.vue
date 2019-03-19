@@ -4,17 +4,17 @@
       <v-img aspect-ratio="1" :max-width="100" :src="item.thumbnail"></v-img>
     </v-flex>
     <v-flex xs9>
-      <v-layout column>
+      <v-layout wrap>
         <v-flex v-if="shortName">{{getShortName()}}</v-flex>
         <v-flex v-else>{{item.title}}</v-flex>
-        <v-layout row justify-space-between>
-          <v-flex>
+        <v-layout wrap justify-end>
+          <v-flex mt-2 mr-2>
             <span>Quantity:</span>
             <i @click="minus(item)" class="fas fa-minus mx-2"></i>
             <span class="numeric-field">{{item.quantity}}</span>
             <i @click="add(item)" class="fas fa-plus mx-2"></i>
           </v-flex>
-          <v-flex class="numeric-field mt-2 mr-2">{{item.price}} €</v-flex>
+          <v-flex class="numeric-field mt-2 mr-2">Price per unit: {{item.price}} €</v-flex>
         </v-layout>
       </v-layout>
     </v-flex>
@@ -44,12 +44,10 @@ export default {
       return this.item.title;
     },
     add(item) {
-      item.quantity = item.quantity + 1;
+      this.$store.dispatch("addToCart", item);
     },
     minus(item) {
-      if (item.quantity > 0) {
-        item.quantity = item.quantity - 1;
-      }
+      this.$store.dispatch("removeFromCart", item);
     }
   }
 };

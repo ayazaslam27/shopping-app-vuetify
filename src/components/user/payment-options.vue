@@ -4,7 +4,7 @@
       <i class="far fa-money-bill-alt big-icon"></i>
       <span class="heading-title">Payment Options</span>
     </v-flex>
-    <v-flex class="d-flex flex-row pt-4 justify-content-center align-items-center">
+    <v-flex xs4 class="pt-4">
       <div :disabled="!enable" class="paypal-button-container"></div>
     </v-flex>
   </v-layout>

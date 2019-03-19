@@ -14,7 +14,7 @@
       </v-flex>
 
       <v-flex xs12 sm12 md3 order-xs5 order-sm5 order-md3>
-        <v-text-field class="pr-4" prepend-icon="search" placeholder="Search" clearable sm4></v-text-field>
+        <v-text-field class="pr-4" append-icon="search" placeholder="Search" clearable sm4></v-text-field>
       </v-flex>
 
       <v-flex v-if="!isUserLoggedIn" xs2 sm1 md1 order-sm3 order-md4 class="navigation-link">
@@ -26,7 +26,7 @@
 
       <v-flex v-if="isUserLoggedIn" xs2 sm1 md1 order-sm3 order-md4 class="navigation-link">
         <v-menu :nudge-width="150">
-          <v-btn flat v-on="on" slot="activator">
+          <v-btn flat slot="activator">
             <v-icon class="icon fas fa-user-circle pr-3"></v-icon>
             <span class="hidden-md-and-down">{{loggedInUser.name}}</span>
           </v-btn>

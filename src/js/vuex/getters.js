@@ -15,6 +15,10 @@
     return state.cartItems;
   },
 
+  getTotalCartItems: function(state) {
+    return state.totalCartItems;
+  },
+
   getTopProducts: function(state) {
     return state.topProducts;
   },
@@ -39,6 +43,7 @@
 export default {
   getCategories: getters.getCategories,
   getItems: getters.getItems,
+  getTotalCartItems: getters.getTotalCartItems,
   getMenu: getters.getMenu,
   getCartItems: getters.getCartItems,
   getTopProducts: getters.getTopProducts,
