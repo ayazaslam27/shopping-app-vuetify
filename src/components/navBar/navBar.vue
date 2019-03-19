@@ -43,36 +43,39 @@
       </v-flex>
 
       <v-flex xs2 sm1 md1 order-sm3 order-md4 class="navigation-link">
-        <v-btn
-          flat
-          :to="{name: 'checkout'}"
-          @mouseover.native="showCart"
-          @mouseleave.native="hideCart"
-        >
-          <v-icon class="icon fas fa-shopping-cart"></v-icon>
-          <span class="hidden-md-and-down pl-2">Cart</span>
-        </v-btn>
+        <v-menu v-model="menu" :close-on-content-click="false" :nudge-width="500">
+          <v-btn flat slot="activator">
+            <v-icon class="icon fas fa-shopping-cart"></v-icon>
+            <span class="hidden-md-and-down pl-2">Cart</span>
+          </v-btn>
+
+          <v-card v-if="count > 0">
+            <cart></cart>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn flat large @click="menu = false">Cancel</v-btn>
+              <v-btn color="primary" flat large @click="checkout" :to="{name: 'checkout'}">Checkout</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
       </v-flex>
     </v-layout>
   </v-toolbar>
 </template>
 
 <script>
+import cart from "@/components/cart/cart";
 export default {
   name: "NavBar",
   data() {
     return {
-      showCartonHover: true,
-      openSideMenu: false
+      openSideMenu: false,
+      menu: false
     };
   },
+
   methods: {
-    showCart() {
-      this.$parent.$emit("showCartEvent", true);
-    },
-    hideCart() {
-      this.$parent.$emit("hideCartEvent");
-    },
     toggleSideMenu() {
       this.openSideMenu = !this.openSideMenu;
       this.$emit("toggleSideMenu", this.openSideMenu);
@@ -82,15 +85,31 @@ export default {
       this.$store.dispatch("setUserInfo", {});
       this.$router.push("/");
     },
-    goToProfile() {}
+    goToProfile() {},
+    checkout() {
+      this.menu = false;
+    }
+  },
+  watch: {
+    count(count) {
+      if (count == 0) {
+        this.menu = false;
+      }
+    }
   },
   computed: {
+    count() {
+      return this.$store.getters.getTotalCartItems;
+    },
     loggedInUser() {
       return this.$store.getters.getUser;
     },
     isUserLoggedIn() {
       return this.$store.getters.isUserAuthenticated;
     }
+  },
+  components: {
+    cart
   }
 };
 </script>

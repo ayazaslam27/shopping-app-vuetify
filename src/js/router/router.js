@@ -36,27 +36,27 @@ export default new Router({
           path: "products/:category",
           name: "main-category",
           component: Products
+        },
+        {
+          path: "/Registration",
+          name: "registration",
+          component: Registration
+        },
+        {
+          path: "/Checkout",
+          name: "checkout",
+          component: Checkout
+        },
+        {
+          path: "/Profile",
+          name: "profile"
+        },
+        {
+          path: "/Order",
+          name: "order",
+          component: Order
         }
       ]
-    },
-    {
-      path: "/Registration",
-      name: "registration",
-      component: Registration
-    },
-    {
-      path: "/Checkout",
-      name: "checkout",
-      component: Checkout
-    },
-    {
-      path: "/Profile",
-      name: "profile"
-    },
-    {
-      path: "/Order",
-      name: "order",
-      component: Order
     }
   ]
 });

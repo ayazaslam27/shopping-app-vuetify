@@ -1,10 +1,10 @@
 <template>
-  <v-layout row py-4 v-if="item.quantity > 0" justify-space-between>
+  <v-layout wrap py-4 v-if="item.quantity > 0" justify-space-between>
     <v-flex xs3>
       <v-img aspect-ratio="1" :max-width="100" :src="item.thumbnail"></v-img>
     </v-flex>
     <v-flex xs9>
-      <v-layout wrap>
+      <v-layout wrap justify-space-between>
         <v-flex v-if="shortName">{{getShortName()}}</v-flex>
         <v-flex v-else>{{item.title}}</v-flex>
         <v-layout wrap justify-end>

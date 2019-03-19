@@ -8,9 +8,11 @@
 
     <template v-for="(item, index) in reativeItems">
       <v-container grid-list-md :key="index + 'PB'">
-        <v-card class="card" d-flex>
-          <banner :item="item"></banner>
-        </v-card>
+        <v-hover>
+          <v-card slot-scope="{ hover }" :class="`elevation-${hover ? 12 : 3}`" class="card" d-flex>
+            <banner :item="item"></banner>
+          </v-card>
+        </v-hover>
       </v-container>
     </template>
     <div class="text-xs-center" v-if="reativeItems.length > 0">
