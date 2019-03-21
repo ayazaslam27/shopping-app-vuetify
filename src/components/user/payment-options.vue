@@ -10,6 +10,8 @@
   </v-layout>
 </template>
 <script>
+let that = this;
+import apiActions from "@/js/restfulApiCaller/apiActions";
 export default {
   name: "payment-options",
   data() {
@@ -68,25 +70,67 @@ export default {
             },
             items: this.order.items,
             shipping_address: this.order.shipping_address,
-            payee: this.order.payee,
-            invoice_number: "123324343534"
+            payee: this.order.payee
           }
         ]
       });
     },
     onApprove: function(data, actions) {
       // Capture the funds from the transaction
-      return actions.order.capture().then(function(details) {
+      let that = this;
+      actions.order.capture().then(function(details) {
         // Show a success message to your buyer
-        alert("Transaction completed by ");
+        console.log(details);
+        let orderObject = that.makeOrderObject(details);
         // Call your server to save the transaction via callback
-        return fetch("/url", {
-          method: "post",
-          body: JSON.stringify({
-            orderID: data.orderID
+        apiActions
+          .placeOrder(orderObject)
+          .then(result => {
+            //Todo: Render success view and more.....
+            console.log(result);
           })
-        });
+          .catch(error => {
+            console.log(error);
+          });
       });
+    },
+    makeOrderObject(details) {
+      let orderObject = {
+        audience: "we.sell.com", //must be moved somewhere safe,
+        create_time: details.create_time,
+        payer_id: details.payer.payer_id,
+        order_id_global: details.id,
+        status: details.status,
+        update_time: details.update_time,
+
+        payee: {
+          email_address: this.order.payee,
+          name: this.order.shipping_address.user,
+          shipping_address: {
+            street_name: this.order.shipping_address.line1,
+            house_number: this.order.shipping_address.line1,
+            postcode: this.order.shipping_address.postal_code,
+            city: this.order.shipping_address.city,
+            country: this.order.shipping_address.country_code
+          }
+        },
+        total_amount: this.order.amount
+      };
+      let products = [];
+      for (let index = 0; index < this.order.items.length; index++) {
+        const element = this.order.items[index];
+        let product = {
+          article_number: element.article_number + "",
+          name: element.name,
+          unit_amount:
+            element.unit_amount.value + " " + element.unit_amount.currency_code,
+          quantity: element.quantity
+        };
+
+        products.push(product);
+      }
+      orderObject.purchase_products = products;
+      return orderObject;
     }
   }
 };

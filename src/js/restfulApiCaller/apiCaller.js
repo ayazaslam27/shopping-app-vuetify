@@ -17,7 +17,7 @@ function get(url, params) {
   });
 }
 
-function post(url, params, callback) {
+function post(url, params) {
   return new Promise((resolve, reject) => {
     axios
       .post(url, params, {

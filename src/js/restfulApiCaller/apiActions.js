@@ -8,7 +8,8 @@ var url = {
   totalProductsUrl: "/products/getTotalProducts",
   newUserRegisterUrl: "/user/register/",
   loginUrl: "/user/login/",
-  orderUrl: "/buy/"
+  canOrderUrl: "/buy/",
+  orderUrl: "/buy/placeOrder"
 };
 
 var getCategories = function() {
@@ -102,7 +103,20 @@ var login = function(params) {
   });
 };
 
-var order = function(params) {
+var canOrder = function(params) {
+  return new Promise((resolve, reject) => {
+    caller
+      .post(url.canOrderUrl, params)
+      .then(result => {
+        resolve(result);
+      })
+      .catch(error => {
+        reject(error);
+      });
+  });
+};
+
+var placeOrder = function(params) {
   return new Promise((resolve, reject) => {
     caller
       .post(url.orderUrl, params)
@@ -123,5 +137,6 @@ export default {
   getTopProducts: getTopProducts,
   register: register,
   login: login,
-  order: order
+  canOrder: canOrder,
+  placeOrder: placeOrder
 };

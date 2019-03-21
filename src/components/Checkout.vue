@@ -96,7 +96,8 @@ export default {
             value: "" + element.price,
             currency_code: "USD"
           },
-          quantity: "" + element.quantity
+          quantity: "" + element.quantity,
+          article_number: element.articleNumber
         };
         paypalItems[index] = paypalItem;
       }
@@ -127,7 +128,7 @@ export default {
       };
       var that = this;
       apiActions
-        .order(params)
+        .canOrder(params)
         .then(result => {
           that.showPaymentSection = result.showPaymentOptions;
         })
